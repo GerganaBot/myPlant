@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from myPlant.plants.forms import ProfileForm
+from myPlant.plants.models import Plant
 
 
 def home_page(request):
@@ -29,7 +30,11 @@ def details_profile(request):
 
 
 def catalogue(request):
-    return render(request, template_name='plants/catalogue.html')
+    all_plants = Plant.objects.all()
+    context = {
+        'all_plants': all_plants
+    }
+    return render(request, template_name='plants/catalogue.html', context=context)
 
 
 def create_plant(request):
