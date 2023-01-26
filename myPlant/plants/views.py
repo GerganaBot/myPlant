@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from myPlant.plants.forms import ProfileForm
 
 
 def home_page(request):
@@ -6,7 +8,12 @@ def home_page(request):
 
 
 def create_profile(request):
-    return render(request, template_name='plants/create-profile.html')
+    form = ProfileForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('catalogue')
+    context = {'form': form}
+    return render(request, template_name='plants/create-profile.html', context=context)
 
 
 def edit_profile(request):
