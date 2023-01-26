@@ -14,11 +14,15 @@
 <div id="box">
     <header>
         <!-- Navigation Bar -->
-        <h1><a class="index-navigation" href="#">MyPlants</a></h1>
+        <h1><a class="index-navigation" href="{% url 'home-page' %}">MyPlants</a></h1>
         <nav>
+            {% if not request.user.is_authenticated %}
+            <a href="{% url 'create-profile' %}">Create Profile</a>
+            {% else %}
             <a href="{% url 'catalogue' %}">Catalogue</a>
             <a href="{% url 'create-plant' %}">Create Plant</a>
             <a href="{% url 'profile-details' %}">Profile</a>
+            {% endif %}
         </nav>
     </header>
     <section>

@@ -26,3 +26,6 @@ class Plant(models.Model):
     description = models.TextField(blank=False, null=False)
     price = models.FloatField(blank=False, null=False)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
