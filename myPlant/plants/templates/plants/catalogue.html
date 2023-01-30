@@ -6,11 +6,15 @@
 <!-- Display paragraph: If there are no plants yet-->
         <p class="no-articles">No plants yet</p>
 
-        <!-- Display div "plant" with information about every plant (if any)-->
-        <section id="catalogue">
+    <!-- Display div "plant" with information about every plant (if any)-->
+    <section id="catalogue">
 
 
-            {% for plant in all_plants %}
+        {% for plant in all_plants %}
+            {% if not plant %}
+                <!-- Display paragraph: If there are no plants yet-->
+                <p class="no-articles">No plants yet</p>
+            {% else %}
                 <div class="plant-card">
                     <div class="image-wrap">
                         <!-- plant image -->
@@ -19,14 +23,15 @@
                     <!-- plant name -->
                     <h3>{{ plant.name }}</h3>
                     <!-- plant description -->
-                    <h1>{{ plant.description}}</h1>
+                    <h1>{{ plant.description }}</h1>
                     <div class="details-buttons">
                         <!-- plant details button -->
                         <a href="{% url 'plant-details' plant.id %}" class="details-btn">Details</a>
                     </div>
                 </div>
+            {% endif %}
         {% endfor %}
-        </section>
+    </section>
 {% endblock %}
 
 
