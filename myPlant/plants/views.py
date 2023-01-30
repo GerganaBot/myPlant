@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from myPlant.plants.forms import ProfileForm
+from myPlant.plants.forms import ProfileForm, PlantForm
 from myPlant.plants.models import Plant, Profile
 
 
@@ -39,7 +39,13 @@ def catalogue(request):
 
 
 def create_plant(request):
-    return render(request, template_name='plants/create-plant.html')
+    form = PlantForm(request.POST or None)
+    if form.is_valid():
+        plant = form.save(commit=False)
+        plant.save()
+        return redirect('catalogue')
+    context = {'form': form}
+    return render(request, template_name='plants/create-plant.html', context=context)
 
 
 def details_plant(request):

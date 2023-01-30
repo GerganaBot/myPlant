@@ -1,5 +1,5 @@
 from django import forms
-from myPlant.plants.models import Profile
+from myPlant.plants.models import Profile, Plant
 
 
 class ProfileForm(forms.ModelForm):
@@ -11,3 +11,9 @@ class ProfileForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
         }
+
+
+class PlantForm(forms.ModelForm):
+    class Meta:
+        model = Plant
+        fields = '__all__'
