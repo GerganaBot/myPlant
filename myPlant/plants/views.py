@@ -1,17 +1,18 @@
 from django.shortcuts import render, redirect
 
 from myPlant.plants.forms import ProfileForm
-from myPlant.plants.models import Plant
+from myPlant.plants.models import Plant, Profile
 
 
 def home_page(request):
-    return render(request, template_name='plants/home-page.html')
+    return render(request, template_name='plants/home-page-without-profile.html')
 
 
 def create_profile(request):
     form = ProfileForm(request.POST or None)
     if form.is_valid():
-        form.save()
+        profile = form.save(commit=False)
+        profile.save()
         return redirect('catalogue')
     context = {'form': form}
     return render(request, template_name='plants/create-profile.html', context=context)
