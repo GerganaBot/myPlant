@@ -2,17 +2,17 @@
 {% load static %}
 
 {% block content %}
-     {% include 'plants/home-page-with-profile.html' %}
+    {% include 'plants/home-page-with-profile.html' %}
 
     <!-- Display div "plant" with information about every plant (if any)-->
     <section id="catalogue">
+        {% if not plant %}
+            <!-- Display paragraph: If there are no plants yet-->
+            <p class="no-articles">No plants yet</p>
+        {% else %}
 
+            {% for plant in all_plants %}
 
-        {% for plant in all_plants %}
-            {% if not plant %}
-                <!-- Display paragraph: If there are no plants yet-->
-                <p class="no-articles">No plants yet</p>
-            {% else %}
                 <div class="plant-card">
                     <div class="image-wrap">
                         <!-- plant image -->
@@ -27,8 +27,9 @@
                         <a href="{% url 'plant-details' plant.id %}" class="details-btn">Details</a>
                     </div>
                 </div>
-            {% endif %}
-        {% endfor %}
+
+            {% endfor %}
+        {% endif %}
     </section>
 {% endblock %}
 

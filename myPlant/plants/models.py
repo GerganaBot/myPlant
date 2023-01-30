@@ -25,6 +25,7 @@ class Plant(models.Model):
     image_url = models.URLField(blank=False, null=False)
     description = models.TextField(blank=False, null=False)
     price = models.FloatField(blank=False, null=False)
+    to_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
