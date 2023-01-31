@@ -6,13 +6,12 @@
 
     <!-- Display div "plant" with information about every plant (if any)-->
     <section id="catalogue">
-        {% if not plant %}
+        {% if not all_plants %}
             <!-- Display paragraph: If there are no plants yet-->
             <p class="no-articles">No plants yet</p>
         {% else %}
 
             {% for plant in all_plants %}
-
                 <div class="plant-card">
                     <div class="image-wrap">
                         <!-- plant image -->

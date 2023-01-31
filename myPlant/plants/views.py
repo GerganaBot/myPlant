@@ -42,6 +42,8 @@ def create_plant(request):
     form = PlantForm(request.POST or None)
     if form.is_valid():
         plant = form.save(commit=False)
+        profile = Profile.objects.get(pk=1)
+        plant.to_profile = profile
         plant.save()
         return redirect('catalogue')
     context = {'form': form}
