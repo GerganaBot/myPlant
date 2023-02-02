@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from myPlant.plants.forms import ProfileForm, PlantForm
+from myPlant.plants.forms import ProfileForm, PlantForm, PlantDeleteForm
 from myPlant.plants.models import Plant, Profile
 
 
@@ -72,8 +72,14 @@ def edit_plant(request, id):
     return render(request, template_name='plants/edit-plant.html', context=context)
 
 
-def delete_plant(request):
-    return render(request, template_name='plants/delete-plant.html')
+def delete_plant(request, id):
+    plant = get_object_or_404(Plant, id=id)
+    if request.method == "POST":
+        plant.delete()
+        return redirect('catalogue')
+    form = PlantDeleteForm(initial=plant.__dict__)
+    context = {'form': form}
+    return render(request, template_name='plants/delete-plant.html', context=context)
 
 
 

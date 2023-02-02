@@ -17,3 +17,11 @@ class PlantForm(forms.ModelForm):
     class Meta:
         model = Plant
         exclude = ['to_profile']
+
+
+class PlantDeleteForm(PlantForm):
+    def __int__(self, *args, **kwargs):
+        super().__init__(self, *args, **kwargs)
+        for (_, field) in self.fields.items():
+            field.widget.attrs['disabled'] = True
+            field.widget.attrs['readonly'] = True
