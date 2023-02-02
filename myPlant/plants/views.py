@@ -58,8 +58,18 @@ def details_plant(request, id):
     return render(request, template_name='plants/plant-details.html', context=context)
 
 
-def edit_plant(request):
-    return render(request, template_name='plants/edit-plant.html')
+def edit_plant(request, id):
+    plant = get_object_or_404(Plant, id=id)
+    if request.method == "GET":
+        form = PlantForm(instance=plant, initial=plant.__dict__)
+    else:
+        form = PlantForm(request.POST, instance=plant)
+        if form.is_valid():
+            form.save()
+            return redirect('catalogue')
+    context = {'form': form}
+
+    return render(request, template_name='plants/edit-plant.html', context=context)
 
 
 def delete_plant(request):
