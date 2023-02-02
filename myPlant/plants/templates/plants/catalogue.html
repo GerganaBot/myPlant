@@ -20,7 +20,7 @@
                     <!-- plant name -->
                     <h3>{{ plant.name }}</h3>
                     <!-- plant description -->
-                    <h1>{{ plant.description }}</h1>
+                    <h1>{{ plant.description | truncatechars:20 }}</h1>
                     <div class="details-buttons">
                         <!-- plant details button -->
                         <a href="{% url 'plant-details' plant.id %}" class="details-btn">Details</a>
