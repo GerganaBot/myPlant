@@ -11,19 +11,19 @@
                      src="https://www.ikea.com/om/en/images/products/fejka-artificial-potted-plant-orchid-white__0748880_pe745269_s5.jpg?f=s"
                      alt='plant image'/>
                 <!-- plant type -->
-                <h1>Indoor Plants</h1>
+                <h1>{{ plant.plant_type}}</h1>
                 <!-- plant name -->
-                <p><span class="description-plant">Name: Orchid</span></p>
+                <p><span class="description-plant">Name: {{ plant.name }}</span></p>
                 <!-- plant price -->
-                <p><span class="description-plant">Price: 10.00</span></p>
+                <p><span class="description-plant">Price: {{ plant.price }}</span></p>
                 <!-- plant description -->
-                <p><span class="description-plant">Description: Orchids are plants that belong to the family Orchidaceae, a diverse and widespread group of flowering plants with blooms that are often colourful and fragrant.</span></p>
+                <p><span class="description-plant">Description: {{ plant.description}} </span></p>
             </div>
 
             <!-- Edit/Delete buttons -->
             <div class="buttons">
-                <a href="#" class="edit-button">Edit</a>
-                <a href="#" class="delete-button">Delete</a>
+                <a href="{% url 'edit-plant' plant.id %}" class="edit-button">Edit</a>
+                <a href="{% url 'delete-plant' plant.id %}" class="delete-button">Delete</a>
             </div>
         </div>
     </section>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from myPlant.plants.forms import ProfileForm, PlantForm
 from myPlant.plants.models import Plant, Profile
@@ -50,8 +50,12 @@ def create_plant(request):
     return render(request, template_name='plants/create-plant.html', context=context)
 
 
-def details_plant(request):
-    return render(request, template_name='plants/plant-details.html')
+def details_plant(request, id):
+    plant = get_object_or_404(Plant, id=id)
+    context = {
+        'plant': plant,
+    }
+    return render(request, template_name='plants/plant-details.html', context=context)
 
 
 def edit_plant(request):
