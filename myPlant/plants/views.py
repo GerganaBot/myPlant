@@ -78,6 +78,8 @@ def delete_plant(request, id):
         plant.delete()
         return redirect('catalogue')
     form = PlantDeleteForm(initial=plant.__dict__)
+    for field in form.fields:
+        form.fields[field].disabled = True
     context = {'form': form}
     return render(request, template_name='plants/delete-plant.html', context=context)
 
