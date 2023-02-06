@@ -27,7 +27,11 @@ def delete_profile(request):
 
 
 def details_profile(request):
-    return render(request, template_name='plants/profile-details.html')
+    profile = get_object_or_404(Profile, id=1)
+    context = {
+        'profile': profile,
+    }
+    return render(request, template_name='plants/profile-details.html', context=context)
 
 
 def catalogue(request):

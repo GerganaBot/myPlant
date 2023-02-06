@@ -7,14 +7,16 @@
         <div class="info-section">
             <div class="plant-header">
                 <!-- default profile image (if the user does NOT have any)-->
-                    <img class="plant-img" src="/images/default.jpg" alt='profile-image'/>
-                <!-- if the user has a profile image -->
-                    <img class="plant-img" src="" alt='profile-image'/>
+                {% if not profile.profile_picture %}
+                    <img class="plant-img" src="{% static '/images/default.jpg' %}" alt='profile-image'/>
+                {% else %}
+                    <img class="plant-img" src="{{ profile.profile_picture }}" alt='profile-image'/>
+                {% endif %}
                 <!-- user full name -->
-                <h1>Svetoslava Stoyanova</h1>
+                <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
 
                 <!-- user username -->
-                <p class="description">Username: SS1234</p>
+                <p class="description">Username: {{ profile.username }}</p>
 
                 <p class="description">Total stars:</p>
                 <!-- if the user has only one plant -->
@@ -31,8 +33,8 @@
 
                 <!-- Edit/Delete buttons -->
                 <div class="buttons">
-                    <a href="#" class="edit-button">Edit</a>
-                    <a href="#" class="delete-button">Delete</a>
+                    <a href="{% url 'edit-profile' %}" class="edit-button">Edit</a>
+                    <a href="{% url 'delete-profile' %}" class="delete-button">Delete</a>
                 </div>
             </div>
         </div>
