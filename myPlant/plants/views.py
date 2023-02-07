@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from myPlant.plants.forms import ProfileForm, PlantForm, PlantDeleteForm
+from myPlant.plants.forms import ProfileForm, PlantForm, PlantDeleteForm, ProfileDeleteForm
 from myPlant.plants.models import Plant, Profile
 
 
@@ -19,11 +19,29 @@ def create_profile(request):
 
 
 def edit_profile(request):
-    return render(request, template_name='plants/edit-profile.html')
+    profile = get_object_or_404(Profile, id=1)
+    if request.method == "GET":
+        form = ProfileForm(instance=profile, initial=profile.__dict__)
+    else:
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile-details')
+    context = {'form': form}
+
+    return render(request, template_name='plants/edit-profile.html', context=context)
 
 
 def delete_profile(request):
-    return render(request, template_name='plants/delete-profile.html')
+    profile = get_object_or_404(Profile, id=1)
+    if request.method == "POST":
+        profile.delete()
+        return redirect('home-page')
+    form = ProfileDeleteForm(initial=profile.__dict__)
+    for field in form.fields:
+        form.fields[field].disabled = True
+    context = {'form': form}
+    return render(request, template_name='plants/delete-profile.html', context=context)
 
 
 def details_profile(request):
