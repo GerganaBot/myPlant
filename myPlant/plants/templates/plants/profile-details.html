@@ -20,16 +20,21 @@
 
                 <p class="description">Total stars:</p>
                 <!-- if the user has only one plant -->
-                <img class="star-img" src="/images/star3.png" alt='profile-image'/>
-                <!-- if the user has two plants -->
-                <img class="star-img" src="/images/star3.png" alt='profile-image'/>
-                <img class="star-img" src="/images/star3.png" alt='profile-image'/>
-                <!-- if the user has three or more plants -->
-                <img class="star-img" src="/images/star3.png" alt='profile-image'/>
-                <img class="star-img" src="/images/star3.png" alt='profile-image'/>
-                <img class="star-img" src="/images/star3.png" alt='profile-image'/>
-                <!-- if the user has zero plants -->
-                <p class="description">Total stars: 0</p>
+                {% if plants_of_the_profile.count == 1 %}
+                    <img class="star-img" src="{% static '/images/star3.png' %}" alt='profile-image'/>
+                    <!-- if the user has two plants -->
+                {% elif plants_of_the_profile.count == 2 %}
+                    <img class="star-img" src="{% static '/images/star3.png' %}" alt='profile-image'/>
+                    <img class="star-img" src="{% static '/images/star3.png' %}" alt='profile-image'/>
+                    <!-- if the user has three or more plants -->
+                {% elif plants_of_the_profile.count >= 3 %}
+                    <img class="star-img" src="{% static '/images/star3.png' %}" alt='profile-image'/>
+                    <img class="star-img" src="{% static '/images/star3.png' %}" alt='profile-image'/>
+                    <img class="star-img" src="{% static '/images/star3.png' %}" alt='profile-image'/>
+                    <!-- if the user has zero plants -->
+                {% elif plants_of_the_profile.count == 0 %}
+                    <p class="description">Total stars: 0</p>
+                {% endif %}
 
                 <!-- Edit/Delete buttons -->
                 <div class="buttons">

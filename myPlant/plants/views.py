@@ -27,9 +27,14 @@ def delete_profile(request):
 
 
 def details_profile(request):
-    profile = get_object_or_404(Profile, id=1)
+    profile = get_object_or_404(Profile)
+    plants = Plant.objects.all()
+    plants_of_the_profile = plants.filter(to_profile=profile)
+
     context = {
         'profile': profile,
+        'plants': plants,
+        'plants_of_the_profile': plants_of_the_profile,
     }
     return render(request, template_name='plants/profile-details.html', context=context)
 
@@ -86,6 +91,9 @@ def delete_plant(request, id):
         form.fields[field].disabled = True
     context = {'form': form}
     return render(request, template_name='plants/delete-plant.html', context=context)
+
+
+
 
 
 

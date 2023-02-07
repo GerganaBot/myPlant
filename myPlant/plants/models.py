@@ -31,6 +31,4 @@ class Plant(models.Model):
         super().save(*args, **kwargs)
 
 
-class Star(models.Model):
-    to_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
